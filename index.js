@@ -1,4 +1,4 @@
-#!usr/bin/env node
+#!/usr/bin/node
 const { spawn } = require('child_process');
 const inquirer = require('inquirer');
 const path = require('path');
