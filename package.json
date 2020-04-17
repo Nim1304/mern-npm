@@ -1,0 +1,28 @@
+{
+  "name": "init-mern",
+  "version": "1.0.0",
+  "description": "create mern boilerplate",
+  "main": "index.js",
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "fs": "^0.0.1-security",
+    "fs-extra": "^9.0.0",
+    "inquirer": "^7.1.0",
+    "mongodb": "^3.5.6",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nim1304/mern-npm.git"
+  },
+  "author": "Nimish Shah",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/Nim1304/mern-npm/issues"
+  },
+  "homepage": "https://github.com/Nim1304/mern-npm#readme"
+}
