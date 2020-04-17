@@ -2,6 +2,8 @@
 const { spawn } = require('child_process');
 const inquirer = require('inquirer');
 const path = require('path');
+const _cwd = process.cwd();
+const fs = require('fs-extra');
 
 const createDir = (name)=>{
     spawn('mkdir',[`${name}`],{
@@ -25,15 +27,10 @@ const run = async () => {
             choices: [{ name: "Yes", value: "yes" }, { name: "No", value: "no" }]
         }
     ]);
+    
+    createDir('hi');
+    fs.copySync(path.join(__dirname,'template/'),path.join(_cwd,'hi'));
 
-    spawn('git', ['status'], {
-        cwd: process.cwd(),
-        detached: true,
-        stdio: "inherit"
-    });
-    createDir('hii');
-    changeDir(__dirname);
-    console.log(a);
 }
 
 run();
