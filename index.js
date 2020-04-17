@@ -13,12 +13,11 @@ const createDir = (name)=>{
 
 
 const run = async () => {
-    var a = await inquirer.prompt([
+    const questions = await inquirer.prompt([
         {
-            type: 'list',
-            name: 'frontend',
-            message: 'What frontend do you want to use?',
-            choices: [{ name: "Yes", value: "yes" }, { name: "No", value: "no" }]
+            type: 'input',
+            name: 'projectName',
+            message: 'What is the name of the project? (Use small letters and without space)'
         },
         {
             type: 'list',
@@ -27,7 +26,7 @@ const run = async () => {
             choices: [{ name: "Yes", value: "yes" }, { name: "No", value: "no" }]
         }
     ]);
-    
+    console.log(questions);
     createDir('hi');
     fs.copySync(path.join(__dirname,'template/'),path.join(_cwd,'hi'));
 
