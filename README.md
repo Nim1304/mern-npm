@@ -3,6 +3,9 @@ This is a simple node package which creates a MERN stack boilerplate upon callin
 ### Directions
     Fire up terminal.
 
+    install globally
+    sudo npm install -g init-mern
+
     cd <Your_Project_Working_Directory>
 
     init-mern
