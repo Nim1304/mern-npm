@@ -33,6 +33,13 @@ const installDep =(name)=>{
     })
 }
 
+const gitInit = (name)=>{
+    spawn('git',['init'],{
+        cwd : path.join(_cwd,name),
+        stdio:'inherit'
+    });
+}
+
 const run = async () => {
     const questions = await inquirer.prompt([
         {
@@ -45,6 +52,12 @@ const run = async () => {
             name:"installDep",
             message:"Install Node Modules for Express App?(y)",
             default: "yes"
+        },
+        {
+            type:'confirm',
+            name:'gitInit',
+            message: "Initialize with git ?",
+            default :'no'
         }
     ]);
     console.log(questions);
@@ -62,7 +75,7 @@ const run = async () => {
     })
 
     questions.installDep ? installDep(questions.projectName) : console.log('\x1b[41m%s\x1b[0m',"run npm install after finished setting up");
-
+    questions.gitInit ? gitInit(questions.projectName) : console.log('\x1b[41m%s\x1b[0m',"Git not initialized");
 }
 
 run();

@@ -1,6 +1,6 @@
 {
   "name": "init-mern",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "create mern boilerplate",
   "main": "index.js",
   "dependencies": {
