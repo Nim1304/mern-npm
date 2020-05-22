@@ -15,5 +15,5 @@ This is a simple node package which creates a MERN stack boilerplate upon callin
 
 ## Example
    
-   ![Example](demo/demo.webm)
+   ![Example](demo/example.webm)
 
