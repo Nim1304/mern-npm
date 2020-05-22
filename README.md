@@ -14,17 +14,6 @@ This is a simple node package which creates a MERN stack boilerplate upon callin
     Start Coding...
 
 ## Example
-    cd ~/Documents
-    
-    npx init-mern
-    
-    ? What is the name of the project? (Use small letters and without space) 
-    hello-world
-    
-    ? Install Node Modules for Express App?(y) (Y/n)
-    y
-
-    cd hello-world
-
-    code . || Any of your favourite editor
+   
+   ![Example](demo/demo.webm)
 
