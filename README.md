@@ -3,12 +3,9 @@ This is a simple node package which creates a MERN stack boilerplate upon callin
 ### Directions
     Fire up terminal.
 
-    install globally
-    sudo npm install -g init-mern
-
     cd <Your_Project_Working_Directory>
 
-    init-mern
+    npx init-mern
 
     After this it will ask you questions...answer them
 
@@ -19,7 +16,7 @@ This is a simple node package which creates a MERN stack boilerplate upon callin
 ## Example
     cd ~/Documents
     
-    init-mern
+    npx init-mern
     
     ? What is the name of the project? (Use small letters and without space) 
     hello-world
