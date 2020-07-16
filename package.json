@@ -1,6 +1,6 @@
 {
   "name": "init-mern",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "create mern boilerplate",
   "main": "index.js",
   "dependencies": {
@@ -26,5 +26,6 @@
   "bugs": {
     "url": "https://github.com/Nim1304/mern-npm/issues"
   },
-  "homepage": "https://github.com/Nim1304/mern-npm#readme"
+  "homepage": "https://github.com/Nim1304/mern-npm#readme",
+  "keywords": ["mern","cli","boilerplate","webdev","init"]
 }
