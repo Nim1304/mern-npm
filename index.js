@@ -7,9 +7,12 @@ const fs = require('fs-extra');
 
 const createDir = (name) => {
     return new Promise((resolve, reject) => {
-        fs.mkdirs(path.join(_cwd, `${name}`)).then(() => {
-            resolve('Directory Created');
-        }).catch(err => reject(err));
+        if (name == '')
+            resolve('Kept Directory')
+        else
+            fs.mkdirs(path.join(_cwd, `${name}`)).then(() => {
+                resolve('Directory Created');
+            }).catch(err => reject(err));
     });
 }
 
@@ -25,7 +28,7 @@ const createReactApp = (name) => {
 
 const installDep = (name) => {
     return new Promise((resolve, reject) => {
-        spawn('npm', ['install'], {
+        spawn('npm', ['i', 'express', 'mongoose', 'body-parser', 'cookie-parser', 'path'], {
             cwd: path.join(_cwd, name),
             stdio: 'inherit'
         });
@@ -45,7 +48,7 @@ const run = async () => {
         {
             type: 'input',
             name: 'projectName',
-            message: 'What is the name of the project? (Use small letters and without space)'
+            message: 'What is the name of the project? (Use small letters and without space, leave blank for using current directory)'
         },
         {
             type: 'confirm',
@@ -60,20 +63,22 @@ const run = async () => {
             default: 'no'
         }
     ]);
-    console.log(questions);
+    // console.log(questions);
+    questions.projectName = questions.projectName.trim()
+    console.log(questions)
     await createDir(questions.projectName).then((data) => {
-        console.log('\x1b[32m%s\x1b[0m', "Directory Created");
+        console.log('\x1b[32m%s\x1b[0m', data);
     })
 
     await createReactApp(questions.projectName).then((data) => {
         console.log('\x1b[32m%s\x1b[0m', "ReactJS Added");
     })
 
-    fs.copy(path.join(__dirname, 'template/'), path.join(_cwd, questions.projectName),async (err) => {
+    fs.copy(path.join(__dirname, 'template/'), path.join(_cwd, questions.projectName), async (err) => {
         if (!err) {
-            var packageData = JSON.parse(fs.readFileSync(path.join(_cwd, questions.projectName,'package.json')))
+            var packageData = JSON.parse(fs.readFileSync(path.join(_cwd, questions.projectName, 'package.json')))
             packageData['name'] = questions.projectName;
-            fs.writeFileSync(path.join(_cwd, questions.projectName,'package.json'),JSON.stringify(packageData,null,2));
+            fs.writeFileSync(path.join(_cwd, questions.projectName, 'package.json'), JSON.stringify(packageData, null, 2));
             console.log('\x1b[32m%s\x1b[0m', "Express App Generated");
         }
     })
