@@ -18,21 +18,31 @@ const createDir = (name) => {
 
 const createReactApp = (name) => {
     return new Promise((resolve, reject) => {
-        spawn('npx', ['create-react-app', 'client'], {
+        const command = spawn('npx', ['create-react-app', 'client'], {
             cwd: path.join(_cwd, name),
             stdio: "inherit"
         });
-        resolve('success');
+        command.on('close',_ => {
+            resolve();
+        })
+        command.on('error',err => {
+            reject(err);
+        })
     })
 }
 
 const installDep = (name) => {
     return new Promise((resolve, reject) => {
-        spawn('npm', ['i', 'express', 'mongoose', 'body-parser', 'cookie-parser', 'path'], {
+        const command = spawn('npm', ['i', 'express', 'mongoose', 'body-parser', 'cookie-parser', 'path'], {
             cwd: path.join(_cwd, name),
             stdio: 'inherit'
         });
-        resolve('success');
+        command.on('close',_ => {
+            resolve();
+        })
+        command.on('error',err => {
+            reject(err);
+        })
     })
 }
 
@@ -72,6 +82,8 @@ const run = async () => {
 
     await createReactApp(questions.projectName).then((data) => {
         console.log('\x1b[32m%s\x1b[0m', "ReactJS Added");
+    }).catch(err => {
+        console.log('x1b[41m%s\x1b[0m',err);
     })
 
     fs.copy(path.join(__dirname, 'template/'), path.join(_cwd, questions.projectName), async (err) => {
