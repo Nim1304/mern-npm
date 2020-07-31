@@ -15,5 +15,5 @@ This is a simple node package which creates a MERN stack boilerplate upon callin
 
 ## Example
    
-   ![Example](example.gif)
+   ![Example](https://i.ibb.co/jL1s9VF/example.gif)
 
