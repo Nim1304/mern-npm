@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "child_process": "^1.0.2",
-    "fs": "^0.0.1-security",
+    "commander": "^6.0.0",
     "fs-extra": "^9.0.0",
     "inquirer": "^7.1.0",
     "path": "^0.12.7"
@@ -14,18 +14,21 @@
     "init-mern": "./index.js"
   },
   "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Nim1304/mern-npm.git"
+    "url": "git+https://github.com/sudonims/mern-npm.git"
   },
-  "author": "Nimish Shah",
+  "author": "sudonims",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/Nim1304/mern-npm/issues"
+    "url": "https://github.com/sudonims/mern-npm/issues"
   },
-  "homepage": "https://github.com/Nim1304/mern-npm#readme",
-  "keywords": ["mern","cli","boilerplate","webdev","init"]
+  "homepage": "https://github.com/sudonims/mern-npm#readme",
+  "keywords": [
+    "mern",
+    "cli",
+    "boilerplate",
+    "webdev",
+    "init"
+  ]
 }
