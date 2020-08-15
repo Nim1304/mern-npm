@@ -1,6 +1,5 @@
 #!/usr/bin/node
 const spawn = require('child_process').spawn;
-const inquirer = require('inquirer');
 const path = require('path');
 const fs = require('fs-extra');
 const commander = require('commander');
@@ -62,7 +61,7 @@ const run = async () => {
         .parse(process.argv)
     
     args.projectname ? 1 : args['projectname'] = ''
-    // console.log(args)
+
     await createDir(args.projectname).then((data) => {
         console.log('\x1b[32m%s\x1b[0m', data);
     })
