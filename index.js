@@ -54,67 +54,37 @@ const gitInit = (name) => {
     });
 }
 
-const showHelp = () => {
-    console.log("There's been some changes since last update... :)\n");
-    console.log("usage: init-mern [<projectname>] [options]\n\n");
-    console.log("Options:\n");
-    console.log(` -g, --git         Initialize with git repo\n -i, --install     Install Express App dependencies\n -h, --help        Show this help menu`);
-}
 const run = async () => {
-    if (process.argv.length > 2) {
-        const questions = await inquirer.prompt([
-            {
-                type: 'input',
-                name: 'projectName',
-                message: 'What is the name of the project? (Use small letters and without space, leave blank for using current directory)'
-            },
-            {
-                type: 'confirm',
-                name: "installDep",
-                message: "Install Node Modules for Express App?(y)",
-                default: "yes"
-            },
-            {
-                type: 'confirm',
-                name: 'gitInit',
-                message: "Initialize with git ?",
-                default: 'no'
-            }
-        ]);
-        // console.log(questions);
-        questions.projectName = questions.projectName.trim()
-        console.log(questions)
-        await createDir(questions.projectName).then((data) => {
-            console.log('\x1b[32m%s\x1b[0m', data);
-        })
+    const args = new commander.Command().version(require("./package.json").version)
+        .option('-n, --projectname <projectname>', 'Give a project name (ignore the option in case don\'t want new directory)', 'web app')
+        .option('-g, --git', 'Initialize with empty git repo', false)
+        .option('-i, --install', 'Install Express App dependencied', false)
+        .parse(process.argv)
+    
+    args.projectname ? 1 : args['projectname'] = ''
+    // console.log(args)
+    await createDir(args.projectname).then((data) => {
+        console.log('\x1b[32m%s\x1b[0m', data);
+    })
 
-        await createReactApp(questions.projectName).then((data) => {
-            console.log('\x1b[32m%s\x1b[0m', "ReactJS Added");
-        }).catch(err => {
-            console.log('x1b[41m%s\x1b[0m', err);
-        })
+    await createReactApp(args.projectname).then((data) => {
+        console.log('\x1b[32m%s\x1b[0m', "ReactJS Added");
+    }).catch(err => {
+        console.log('x1b[41m%s\x1b[0m', err);
+    })
 
-        fs.copy(path.join(__dirname, 'template/'), path.join(_cwd, questions.projectName), async (err) => {
-            if (!err) {
-                var packageData = JSON.parse(fs.readFileSync(path.join(_cwd, questions.projectName, 'package.json')))
-                packageData['name'] = questions.projectName;
-                fs.writeFileSync(path.join(_cwd, questions.projectName, 'package.json'), JSON.stringify(packageData, null, 2));
-                console.log('\x1b[32m%s\x1b[0m', "Express App Generated");
-            }
-        })
+    fs.copy(path.join(__dirname, 'template/'), path.join(_cwd, args.projectname), async (err) => {
+        if (!err) {
+            var packageData = JSON.parse(fs.readFileSync(path.join(_cwd, args.projectname, 'package.json')))
+            packageData['name'] = args.projectname;
+            fs.writeFileSync(path.join(_cwd, args.projectname, 'package.json'), JSON.stringify(packageData, null, 2));
+            console.log('\x1b[32m%s\x1b[0m', "Express App Generated");
+        }
+    })
 
-        questions.installDep ? installDep(questions.projectName) : console.log('\x1b[41m%s\x1b[0m', "run npm install after finished setting up");
-        questions.gitInit ? gitInit(questions.projectName) : console.log('\x1b[41m%s\x1b[0m', "Git not initialized");
-    } else {
-        console.log('lol');
-    }
+    args.install ? installDep(args.projectname) : console.log('\x1b[41m%s\x1b[0m', "run npm install after finished setting up");
+    args.git ? gitInit(args.projectname) : console.log('\x1b[41m%s\x1b[0m', "Git not initialized");
 }
 
-// run();
-// showHelp()
+run();
 
-const args = commander.program
-                        .option('-g, --git','Initialize with empty git repo',false)
-                        .option('-i, --install','Install Express App dependencied',false).parse(process.argv);
-
-console.log(args);
