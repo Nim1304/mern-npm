@@ -54,36 +54,38 @@ const gitInit = (name) => {
 }
 
 const run = async () => {
-    const args = new commander.Command().version(require("./package.json").version)
-        .option('-n, --projectname <projectname>', 'Give a project name (ignore the option in case don\'t want new directory)', 'web app')
+    const args = new commander.Command('init-mern').version(require("./package.json").version)
+        .option('-n, --projectname <projectname>', 'Give a project name (ignore the option in case don\'t want new directory)', 'mern')
         .option('-g, --git', 'Initialize with empty git repo', false)
         .option('-i, --install', 'Install Express App dependencied', false)
         .parse(process.argv)
-    
-    args.projectname ? 1 : args['projectname'] = ''
+    if (process.argv.length > 2) {
+        args.projectname ? 1 : args['projectname'] = ''
 
-    await createDir(args.projectname).then((data) => {
-        console.log('\x1b[32m%s\x1b[0m', data);
-    })
+        await createDir(args.projectname).then((data) => {
+            console.log('\x1b[32m%s\x1b[0m', data);
+        })
 
-    await createReactApp(args.projectname).then((data) => {
-        console.log('\x1b[32m%s\x1b[0m', "ReactJS Added");
-    }).catch(err => {
-        console.log('x1b[41m%s\x1b[0m', err);
-    })
+        await createReactApp(args.projectname).then((data) => {
+            console.log('\x1b[32m%s\x1b[0m', "ReactJS Added");
+        }).catch(err => {
+            console.log('x1b[41m%s\x1b[0m', err);
+        })
 
-    fs.copy(path.join(__dirname, 'template/'), path.join(_cwd, args.projectname), async (err) => {
-        if (!err) {
-            var packageData = JSON.parse(fs.readFileSync(path.join(_cwd, args.projectname, 'package.json')))
-            packageData['name'] = args.projectname;
-            fs.writeFileSync(path.join(_cwd, args.projectname, 'package.json'), JSON.stringify(packageData, null, 2));
-            console.log('\x1b[32m%s\x1b[0m', "Express App Generated");
-        }
-    })
+        fs.copy(path.join(__dirname, 'template/'), path.join(_cwd, args.projectname), async (err) => {
+            if (!err) {
+                var packageData = JSON.parse(fs.readFileSync(path.join(_cwd, args.projectname, 'package.json')))
+                packageData['name'] = args.projectname;
+                fs.writeFileSync(path.join(_cwd, args.projectname, 'package.json'), JSON.stringify(packageData, null, 2));
+                console.log('\x1b[32m%s\x1b[0m', "Express App Generated");
+            }
+        })
 
-    args.install ? installDep(args.projectname) : console.log('\x1b[41m%s\x1b[0m', "run npm install after finished setting up");
-    args.git ? gitInit(args.projectname) : console.log('\x1b[41m%s\x1b[0m', "Git not initialized");
+        args.install ? installDep(args.projectname) : console.log('\x1b[41m%s\x1b[0m', "run npm install after finished setting up");
+        args.git ? gitInit(args.projectname) : console.log('\x1b[41m%s\x1b[0m', "Git not initialized");
+    } else {
+        console.log('Things been a bit different since last update. The tool is now a complete CLI....:).\nRun with --help for...umm..help ;)')
+    }
 }
 
 run();
-
