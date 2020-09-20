@@ -12,7 +12,11 @@
   "bin": {
     "init-mern": "./index.js"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^7.9.0",
+    "eslint-config-strongloop": "^2.1.0",
+    "eslint-plugin-react": "^7.20.6"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sudonims/mern-npm.git"
