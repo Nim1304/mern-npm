@@ -55,7 +55,7 @@ const gitInit = (name) => {
 
 const run = async () => {
     const args = new commander.Command('init-mern').version(require("./package.json").version)
-        .option('-n, --projectname <projectname>', 'Give a project name (ignore the option in case don\'t want new directory)', 'mern')
+        .option('-n, --projectname <projectname>', 'Give a project name (ignore the option in case don\'t want new directory)', '')
         .option('-g, --git', 'Initialize with empty git repo', false)
         .option('-i, --install', 'Install Express App dependencied', false)
         .parse(process.argv)
